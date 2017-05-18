@@ -1,15 +1,17 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        applicationId "com.wenld.app_material"
+        minSdkVersion 12
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -26,11 +28,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile deps.appcompatV7
-//    testCompile 'junit:junit:4.12'
     compile 'com.zhy:base-rvadapter:3.0.2'
     compile deps.supportV4
     compile deps.supportDesign
     compile deps.constraintLayout
     compile deps.cardViewV7
-    compile 'com.github.LidongWen:AdapterValue:1.0.0'
+    compile project(':module_materialdesign')
+    compile project(':module_recyclerview')
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.google.truth:truth:0.28'
 }

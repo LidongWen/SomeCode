@@ -1,8 +1,9 @@
-package com.wenld.module_materialdesign;
+package com.wenld.app_material;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,10 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("com.wenld.module_materialdesign.test", appContext.getPackageName());
+        Log.e("Test","appContext :"+appContext.getPackageName());
+        assertEquals("com.wenld.app_material", appContext.getPackageName());
     }
+
+
+
 }

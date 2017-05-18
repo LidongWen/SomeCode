@@ -1,1 +1,1 @@
-include ':main', ':module_materialdesign', ':module_recyclerview'
+include ':main', ':module_materialdesign', ':module_recyclerview', 'application:app_material'
