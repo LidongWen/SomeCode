@@ -1,0 +1,1 @@
+include ':main', ':module_materialdesign', ':module_recyclerview'

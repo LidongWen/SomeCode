@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wenld.module_materialdesign">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true">
+        <activity android:name=".md_test.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="com.wenld.module_materialdesign"
+                    android:path="/activity_main"
+                    android:scheme="wenld"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".md_test.TextInputLayoutActivity" />
+        <activity android:name=".md_test.NavigationActivity" />
+        <activity android:name=".md_test.SnackbarActivity" />
+        <activity android:name=".md_test.ToolBarActivity" />
+        <activity android:name=".md_test.CoordinatorLayoutActivity" />
+        <activity android:name=".md_test.BehaviorActivity_1" />
+        <activity android:name=".md_test.BottomSheetDialogActivity" />
+        <activity android:name=".md_test.AnimatorActivity" />
+
+        <activity android:name=".TabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.wenld.module_materialdesign"
+                    android:path="/actiivty_tab"
+                    android:scheme="wenld" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
