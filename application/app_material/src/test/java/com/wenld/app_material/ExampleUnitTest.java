@@ -1,11 +1,10 @@
 package com.wenld.app_material;
 
-import android.util.Log;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -20,12 +19,12 @@ public class ExampleUnitTest {
     }
     @Before @After
     public void reset(){
-        Log.e("reset","begin / end");
+        System.out.println( "reset  begin / end");
     }
     @Test
     public void test1(){
-        Log.e("test1","begin / end");
-//        assertThat(false).isTrue();
-        Log.e("test1","begin / end");
+        System.out.println( "test1  begin / end");
+        assertThat(true).isTrue();
+        System.out.println( "test1  begin / end");
     }
 }
