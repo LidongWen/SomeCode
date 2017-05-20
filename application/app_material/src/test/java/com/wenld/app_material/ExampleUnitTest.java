@@ -27,4 +27,8 @@ public class ExampleUnitTest {
         assertThat(true).isTrue();
         System.out.println( "test1  begin / end");
     }
+    @Test
+    public void  test2(){
+
+    }
 }
