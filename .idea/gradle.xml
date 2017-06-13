@@ -10,9 +10,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/application" />
             <option value="$PROJECT_DIR$/application/app_material" />
+            <option value="$PROJECT_DIR$/application/app_retrofit" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/module_materialdesign" />
             <option value="$PROJECT_DIR$/module_recyclerview" />
+            <option value="$PROJECT_DIR$/module_retrofit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
