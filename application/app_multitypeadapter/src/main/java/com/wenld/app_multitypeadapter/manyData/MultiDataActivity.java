@@ -53,7 +53,7 @@ public class MultiDataActivity extends AppCompatActivity {
                 return SPAN_COUNT;
             }
         };
-
+        layoutManager.setSpanSizeLookup(spanSizeLookup);
         recyclerView.setLayoutManager(layoutManager);
         int space = getResources().getDimensionPixelSize(R.dimen.normal_space);
         recyclerView.addItemDecoration(new ItemDecoration(space));
@@ -69,7 +69,7 @@ public class MultiDataActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             items.add(new Bean03("bean03_" + i));
         }
-        layoutManager.setSpanSizeLookup(spanSizeLookup);
+
 
         adapter.setItems(items);
         adapter.notifyDataSetChanged();

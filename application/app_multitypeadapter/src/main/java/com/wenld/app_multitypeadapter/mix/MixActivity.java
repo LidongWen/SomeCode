@@ -54,10 +54,10 @@ public class MixActivity extends AppCompatActivity {
                 if (item instanceof Bean03) {
                     return SPAN_COUNT;
                 }
-                return SPAN_COUNT;
+                return 2;
             }
         };
-
+        layoutManager.setSpanSizeLookup(spanSizeLookup);
         recyclerView.setLayoutManager(layoutManager);
         int space = getResources().getDimensionPixelSize(R.dimen.normal_space);
         recyclerView.addItemDecoration(new ItemDecoration(space));
