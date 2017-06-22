@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wenld.router.ActivityRouter;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         list.add(new ItemClass("module_materialdesign", "wenld://com.wenld.module_materialdesign/activity_main"));
         list.add(new ItemClass("test", "wenld://com.wenld.somecode/actiivty_test"));
-        list.add(new ItemClass("module_materialdesign", "wenld://com.wenld.module_recyclerView/actiivty_rlv_tab"));
+        list.add(new ItemClass("module_materialdesign", /*"com.wenld.module_recyclerView.MainActivity"*/ "wenld://com.wenld.module_recyclerView/actiivty_rlv_tab"));
         adapter = new CommonAdapter<ItemClass>(this, R.layout.list_items, list) {
             @Override
             protected void convert(ViewHolder holder, final ItemClass s, final int position) {
@@ -40,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW,/* TabActivity.class*/ Uri.parse(s.classUri));
-                            startActivity(intent);
+                        ActivityRouter.startActivity(MainActivity.this, Intent.ACTION_VIEW, Uri.parse(s.classUri));
+//                        Intent intent = new Intent(Intent.ACTION_VIEW,/* TabActivity.class*/ Uri.parse(s.classUri));
+//                        startActivity(intent);
                     }
                 });
             }
