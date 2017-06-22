@@ -10,7 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/application" />
             <option value="$PROJECT_DIR$/application/app_multitypeadapter" />
-            <option value="$PROJECT_DIR$/multitypeadapter" />
+            <option value="$PROJECT_DIR$/module_recyclerview" />
+            <option value="$PROJECT_DIR$/module_retrofit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

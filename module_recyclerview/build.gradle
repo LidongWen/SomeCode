@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+//if (isDebug.toBoolean()) {
+//    apply plugin: 'com.android.application'
+//} else {
+    apply plugin: 'com.android.library'
+//}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -9,7 +13,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
+//        if (isDebug.toBoolean()) {
+//            buildConfigField 'boolean', 'ISAPP', 'true'
+//        } else {
+//            buildConfigField 'boolean', 'ISAPP', 'false'
+//        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -19,6 +27,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//    sourceSets {
+//        main {
+//            if (isDebug.toBoolean()) {
+//                Manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+//            } else {
+//                Manifest.srcFile 'src/main/release/AndroidManifest.xml'
+//                java {
+//                    exclude 'debug/**'
+//                }
+//            }
+//        }
+//    }
 }
 
 dependencies {

@@ -1,8 +1,7 @@
 //include ':main'
 //include ':module_materialdesign'
-//include ':module_recyclerview'
-//include ':module_retrofit'
-include ':multitypeadapter'
+include ':module_recyclerview'
+include ':module_retrofit'
 
 include 'application:app_multitypeadapter'
 //include 'application:app_retrofit'
