@@ -28,6 +28,9 @@
         <activity android:name=".recyclertest.RecyclerViewCardDragActivity" />
         <activity android:name=".recyclertest.card.MainActivity2" />
         <activity android:name=".recyclertest.itemTouch.ItemTouchActivity" />
+
+        <service android:name="com.wenld.recyclerview_test.recyclertest.testService.MyService" >
+        </service>
     </application>
 
 </manifest>

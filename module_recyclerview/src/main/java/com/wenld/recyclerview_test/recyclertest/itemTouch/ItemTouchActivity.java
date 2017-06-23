@@ -8,9 +8,9 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.TextView;
 
 import com.wenld.commontools.AllUtilConfig;
+import com.wenld.multitypeadapter.CommonAdapter;
+import com.wenld.multitypeadapter.base.ViewHolder;
 import com.wenld.recyclerview_test.R;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,13 +36,14 @@ public class ItemTouchActivity extends AppCompatActivity implements ItemTouchMov
 
         this.rlvAtyFilter = (RecyclerView) findViewById(R.id.rlv_activity_itemtouch);
 
-        adapter = new CommonAdapter<String>(this, R.layout.list_items, list) {
+        adapter = new CommonAdapter<String>(this,String.class, R.layout.list_items) {
             @Override
             protected void convert(ViewHolder holder, final String s, final int position) {
                 TextView btn = holder.getView(R.id.btn);
                 btn.setText(s);
             }
         };
+        adapter.setItems(list);
         rlvAtyFilter.setLayoutManager(new LinearLayoutManager(this));
         rlvAtyFilter.setAdapter(adapter);
 //条目触摸帮助类

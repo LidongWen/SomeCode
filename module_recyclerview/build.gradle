@@ -48,11 +48,11 @@ dependencies {
     })
     compile deps.appcompatV7
     testCompile 'junit:junit:4.12'
-    compile 'com.zhy:base-rvadapter:3.0.2'
     compile deps.supportV4
     compile deps.supportDesign
     compile deps.cardViewV7
     compile 'com.github.LidongWen:commonTools:1.2.1'
     compile 'com.github.LidongWen:AdapterValue:1.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.LidongWen:MultiTypeAdapter:0.1.5'
 }

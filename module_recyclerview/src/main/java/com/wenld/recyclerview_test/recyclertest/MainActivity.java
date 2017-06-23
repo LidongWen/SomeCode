@@ -9,12 +9,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wenld.commontools.AllUtilConfig;
+import com.wenld.multitypeadapter.CommonAdapter;
+import com.wenld.multitypeadapter.base.ViewHolder;
 import com.wenld.recyclerview_test.R;
 import com.wenld.recyclerview_test.recyclertest.card.MainActivity2;
 import com.wenld.recyclerview_test.recyclertest.itemTouch.ItemTouchActivity;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new ItemClass("画廊效果", MainActivity2.class));
         list.add(new ItemClass("拖拽", ItemTouchActivity.class));
 
-        adapter = new CommonAdapter<ItemClass>(this, R.layout.list_items, list) {
+        adapter = new CommonAdapter<ItemClass>(this,ItemClass.class, R.layout.list_items ) {
             @Override
             protected void convert(ViewHolder holder, final ItemClass s, final int position) {
                 TextView btn = holder.getView(R.id.btn);
@@ -54,23 +53,24 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
+        adapter.setItems(list);
         rlvAtyFilter.setLayoutManager(new LinearLayoutManager(this));
         rlvAtyFilter.setAdapter(adapter);
         initListener();
     }
 
     private void initListener() {
-        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<String>() {
-            @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
-
-            }
-
-            @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
-                return false;
-            }
-        });
+//        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<String>() {
+//            @Override
+//            public void onItemClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
+//
+//            }
+//
+//            @Override
+//            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
+//                return false;
+//            }
+//        });
     }
 
     public class ItemClass {

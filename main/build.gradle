@@ -32,6 +32,7 @@ dependencies {
     compile project(':module_materialdesign')
     compile project(':module_recyclerview')
     compile project(':router')
-    compile 'com.zhy:base-rvadapter:3.0.2'
+//    compile 'com.zhy:base-rvadapter:3.0.2'
+    compile 'com.github.LidongWen:MultiTypeAdapter:0.1.5'
     testCompile 'junit:junit:4.12'
 }
