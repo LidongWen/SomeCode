@@ -29,7 +29,8 @@
         <activity android:name=".recyclertest.card.MainActivity2" />
         <activity android:name=".recyclertest.itemTouch.ItemTouchActivity" />
 
-        <service android:name="com.wenld.recyclerview_test.recyclertest.testService.MyService" >
+        <service android:name="com.wenld.recyclerview_test.recyclertest.testService.MyService"
+            android:process=":newProcess">
         </service>
     </application>
 

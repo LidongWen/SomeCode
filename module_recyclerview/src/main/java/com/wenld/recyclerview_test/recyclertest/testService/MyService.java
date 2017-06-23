@@ -2,9 +2,10 @@ package com.wenld.recyclerview_test.recyclertest.testService;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.wenld.recyclerview_test.IProcessActionAIDL;
 
 /**
  * <p/>
@@ -41,12 +42,19 @@ public class MyService extends Service {
     public IBinder onBind(Intent intent) {
         return mBinder;
     }
-    public class MyBinder extends Binder {
 
+    private class MyBinder extends IProcessActionAIDL.Stub {
         public void startDownload() {
             Log.d("TAG", "startDownload() executed");
             // 执行具体的下载任务
         }
-
     }
+//    public class MyBinder extends Binder {
+//
+//        public void startDownload() {
+//            Log.d("TAG", "startDownload() executed");
+//            // 执行具体的下载任务
+//        }
+//
+//    }
 }
