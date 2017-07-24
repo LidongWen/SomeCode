@@ -8,13 +8,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wenld.multitypeadapter.CommonAdapter;
+import com.wenld.multitypeadapter.base.OnItemClickListener;
+import com.wenld.multitypeadapter.base.ViewHolder;
 import com.wenld.recyclerview_test.R;
 import com.wenld.recyclerview_test.recyclertest.view.swipecard.CardConfig;
 import com.wenld.recyclerview_test.recyclertest.view.swipecard.SwipeCardCallback;
 import com.wenld.recyclerview_test.recyclertest.view.swipecard.SwipeCardLayoutManager;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class RecyclerViewCardDragActivity extends Activity {
         for (int i = 0; i < 10; i++) {
             list.add("");
         }
-        adapter = new CommonAdapter<String>(this, R.layout.list_larger_img, list) {
+        adapter = new CommonAdapter<String>(this,String.class, R.layout.list_larger_img) {
             @Override
             protected void convert(ViewHolder holder, final String s, final int position) {
             }
@@ -51,19 +51,19 @@ public class RecyclerViewCardDragActivity extends Activity {
         this.mRv = (RecyclerView) findViewById(R.id.rlv_activity_swipeCard);
         mRv.setLayoutManager(new SwipeCardLayoutManager());
         mRv.setAdapter(adapter);
-        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<String>() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
-                textView.setText(position+" ");
+            public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, Object o, int i) {
+                textView.setText(i+" ");
             }
 
             @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder viewHolder, Object o, int i) {
                 return false;
             }
         });
 
-
+        adapter.setItems(list);
         CardConfig.initConfig(this);
 
 

@@ -16,11 +16,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.wenld.multitypeadapter.CommonAdapter;
+import com.wenld.multitypeadapter.base.OnItemClickListener;
+import com.wenld.multitypeadapter.base.ViewHolder;
 import com.wenld.recyclerview_test.R;
 import com.wenld.recyclerview_test.recyclertest.view.longtext.CollapsibleTextView;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,18 +51,20 @@ public class RecyclerViewToViewPageActivity extends AppCompatActivity {
         }
 
         this.rlvAtyFilter = (RecyclerView) findViewById(R.id.rlv_activity_rlv_vp);
-        adapter = new CommonAdapter<String>(this, R.layout.list_img, list) {
+        adapter = new CommonAdapter<String>(this,String.class, R.layout.list_img) {
             @Override
             protected void convert(ViewHolder holder, final String s, final int position) {
                 CollapsibleTextView textView = holder.getView(R.id.longText);
                 textView.setDesc("很长的数据...\n\n\n\n\n\n\n\n  end", TextView.BufferType.SPANNABLE);
             }
         };
+        adapter.setItems(list);
+
         rlvAtyFilter.setLayoutManager(new LinearLayoutManager(this));
 //        rlvAtyFilter.setLayoutManager(new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false));
         rlvAtyFilter.setAdapter(adapter);
         rlvAtyFilter.setItemAnimator(new DefaultItemAnimator());
-        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener<String>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<String>() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, String o, int position) {
 

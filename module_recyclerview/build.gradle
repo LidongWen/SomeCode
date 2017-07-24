@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if (isDebug.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -9,7 +13,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
+//        if (isDebug.toBoolean()) {
+//            buildConfigField 'boolean', 'ISAPP', 'true'
+//        } else {
+//            buildConfigField 'boolean', 'ISAPP', 'false'
+//        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -17,6 +25,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+            }
         }
     }
 }
@@ -28,11 +48,11 @@ dependencies {
     })
     compile deps.appcompatV7
     testCompile 'junit:junit:4.12'
-    compile 'com.zhy:base-rvadapter:3.0.2'
     compile deps.supportV4
     compile deps.supportDesign
     compile deps.cardViewV7
     compile 'com.github.LidongWen:commonTools:1.2.1'
     compile 'com.github.LidongWen:AdapterValue:1.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.LidongWen:MultiTypeAdapter:0.1.5'
 }
