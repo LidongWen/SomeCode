@@ -32,5 +32,5 @@ dependencies {
     compile deps.appcompatV7
     testCompile 'junit:junit:4.12'
     compile "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
-    compile project(':module_retrofit')
+//    compile project(':module_retrofit')
 }

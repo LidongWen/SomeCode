@@ -5,13 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.wenld.app_retrofit.MainActivity">
-    <TextView
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:id="@+id/tv"-->
+    <!--android:text="go"/>-->
+    <com.wenld.app_retrofit.JTv
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/tv"
-        android:text="go"/>
-
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorAccent"/>
+    </com.wenld.app_retrofit.JTv>
 </RelativeLayout>
