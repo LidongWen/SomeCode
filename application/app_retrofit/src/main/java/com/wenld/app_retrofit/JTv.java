@@ -1,16 +1,11 @@
 package com.wenld.app_retrofit;
 
 import android.content.Context;
-import android.os.StrictMode;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
-import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.BounceInterpolator;
 import android.widget.OverScroller;
 
@@ -41,10 +36,8 @@ public class JTv extends BaseViewGroup {
         mOverflingDistance = configuration.getScaledOverflingDistance();
     }
 
-    int lastY = 0;
-
     @Override
-        public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
 
         /*
          * This method JUST determines whether we want to intercept the motion.
@@ -58,7 +51,7 @@ public class JTv extends BaseViewGroup {
         * motion.
         */
         final int action = ev.getAction();
-        Log.e("onInterceptTouchEvent", "onInterceptTouchEvent  "+action);
+        Log.e("onInterceptTouchEvent", "onInterceptTouchEvent  " + action);
         if ((action == MotionEvent.ACTION_MOVE)) {
             return true;
         }
@@ -165,6 +158,8 @@ public class JTv extends BaseViewGroup {
         return false;
     }
 
+    int lastY = 0;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -173,6 +168,9 @@ public class JTv extends BaseViewGroup {
                 initOrResetVelocityTracker();
                 mVelocityTracker.addMovement(event);
                 lastY = (int) event.getY();
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 mVelocityTracker.addMovement(event);
@@ -181,8 +179,6 @@ public class JTv extends BaseViewGroup {
                 lastY = (int) event.getY();
                 break;
             case MotionEvent.ACTION_UP:
-//                mScroller.startScroll((int) getX(), (int) getY(), -(int) (getX() - startX),
-//                        -(int) (getY() - startY));
                 mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 final VelocityTracker velocityTracker = mVelocityTracker;
 //                velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
@@ -192,15 +188,27 @@ public class JTv extends BaseViewGroup {
                 } else {
                     direction = 1;
                 }
-                Log.e("initialVelocity:", initialVelocity + " " + mMaximumVelocity);
-                mScroller.fling(0, 0, 0, Math.abs(initialVelocity), 0, 0, 0, 500);
-//                mScroller.startScroll(0, 0, 0, -100);
-                invalidate();
+                lastDistY = 0;
+                if ((Math.abs(initialVelocity) > mMinimumVelocity)) {
+                    fling(initialVelocity);
+                } else {
+//                    spingBack();
+                }
+//                startScroll();
+                endDrag();
                 break;
         }
 
         return true;
     }
+
+    private void endDrag() {
+        if (mVelocityTracker != null) {
+            mVelocityTracker.recycle();
+            mVelocityTracker = null;
+        }
+    }
+
 
     int direction = -1;
 
@@ -212,32 +220,69 @@ public class JTv extends BaseViewGroup {
         }
     }
 
+
+    int lastDistY = 0;
+    int dist = 0;
+
     @Override
     public void computeScroll() {
-
         if (mScroller.computeScrollOffset()) {
-            scrollBy(mScroller.getCurrX(), direction * mScroller.getCurrY());
-            Log.e("fling", mScroller.getCurrX() + "   " + mScroller.getCurrY());
+//            overScrollBy(mScroller.getCurrX(),direction * mScroller.getCurrY(), getScrollX(), getScrollY(), 0, 500,
+//                    0, mOverflingDistance, false);
+            Log.e("getCurrY()", mScroller.getCurrY() + "  getScrollY(): " + getScrollY());
+
+            /**
+             *
+             */
+            dist = mScroller.getCurrY() - lastDistY;
+            lastDistY += dist;
+//            scrollBy(mScroller.getCurrX(), direction * dist);
+            overScrollBy(0, direction * dist, 0, getScrollY(), 0, 1000, 0, 100, false);
+//            onScrollChanged(0, getScrollY(), 0, dist);
             invalidate();
         }
-
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-//        startX = getX();
-//        startY = getY();
+    protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+        int newScrollY = scrollY + deltaY;
+        final int top = -maxOverScrollY;
+        final int bottom = maxOverScrollY + scrollRangeY;
+        boolean clampedY = false;
+        if (newScrollY > bottom) {
+            newScrollY = bottom;
+            clampedY = true;
+        } else if (newScrollY < top) {
+            newScrollY = top;
+            clampedY = true;
+        }
+        Log.e(" overScrollBy", "  scrollRangeY " + scrollRangeY);
+        scrollTo(0,newScrollY);
+        return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
+    }
+
+    protected void onOverScrolled(int scrollX, int scrollY,
+                                  boolean clampedX, boolean clampedY) {
+        Log.e(" ", "scrollX:" + scrollX + "  scrollY" + scrollY);
+        // Intentionally empty.
     }
 
     public void spingBack() {
-
-        if (mScroller.springBack((int) getX(), (int) getY(), 0, (int) getX(), 0,
-                (int) getY() - 100)) {
-            Log.d("TAG", "getX()=" + getX() + "__getY()=" + getY());
-            invalidate();
+        Log.e("TAG", "getX()=" + getX() + "__getY()=" + getY());
+        if (mScroller.springBack(0, -15, 0, 0, 10,
+                100)) {
+            computeScroll();
         }
     }
 
+    private void fling(int initialVelocity) {
+        mScroller.fling(0, 0, 0, Math.abs(initialVelocity), 0, 0, getScrollY(), 1000);
+        invalidate();
+    }
+
+    private void startScroll() {
+        mScroller.startScroll(0, 0, 0, -100);
+        invalidate();
+    }
 
 }

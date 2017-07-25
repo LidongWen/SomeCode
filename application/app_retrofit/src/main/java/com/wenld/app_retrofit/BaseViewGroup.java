@@ -29,7 +29,7 @@ public class BaseViewGroup extends ViewGroup {
         View child;
         for (int i = 0; i < getChildCount(); i++) {
             child = getChildAt(i);
-            child.measure(widthMeasureSpec, 0);
+            child.measure(0, 0);
         }
     }
 
