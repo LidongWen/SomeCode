@@ -32,5 +32,6 @@ dependencies {
     compile deps.appcompatV7
     testCompile 'junit:junit:4.12'
     compile "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+    compile 'com.github.LidongWen:MultiTypeAdapter:0.1.6'
 //    compile project(':module_retrofit')
 }
